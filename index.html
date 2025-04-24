@@ -24,6 +24,16 @@
     <!-- font-awesome cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+    <!-- gmail from emailjs-->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <!-- Emailjs init   -->
+    <script>
+        (function(){
+          emailjs.init("ogFzsV9JQXagE32qu"); // Replace with your EmailJS public key
+        })();
+      </script>
+
 
 </head>
 
@@ -191,7 +201,7 @@
         <p class="contact-subtitle">
             Have a project in mind or want to say hello? Fill the form below!
         </p>
-        <form>
+        <form id="contact-form">
             <div class="input-group">
                 <input type="text" placeholder="Your Name" required>
             </div>
@@ -243,6 +253,18 @@
             navLinks.classList.toggle("active");
             hamburger.classList.toggle("active");
         });
+        //gmail sendng------
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      emailjs.sendForm('service_gw0z8ou', 'template_i6qlcd7', this)
+        .then(function() {
+          alert('Email sent successfully!');
+        }, function(error) {
+          console.error('FAILED...', error);
+          alert('Failed to send email.');
+        });
+    });
 
         // ParticlesJS config
         particlesJS("particles-js", {
